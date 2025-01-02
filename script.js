@@ -122,19 +122,21 @@ function UpdateProgressBar(data) {
 }
 
 function UpdatePlaybackState(data) {
-	console.log(data);
-	switch (data.state) {
-		case ("paused"):
-		case ("stopped"):
-			SetVisibility(false);
-			break;
-		case ("playing"):
-			UpdateSongInfo(data.attributes);
-			setTimeout(() => {
-				SetVisibility(true);
-			}, animationSpeed * 500);
-			break;
-	}
+  console.log(data);
+  switch (data.state) {
+    case ("paused"):
+    case ("stopped"):
+      // Schedule hiding after a short delay (e.g., 2 seconds)
+      setTimeout(() => {
+        SetVisibility(false); 
+      }, 2000); 
+      break;
+    case ("playing"):
+      // Update song information and show the widget
+      UpdateSongInfo(data.attributes); 
+      SetVisibility(true); 
+      break;
+  }
 }
 
 
